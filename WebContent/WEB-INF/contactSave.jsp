@@ -10,7 +10,7 @@ try {
 		
 		Class.forName("com.mysql.jdbc.Driver");
 		
-		String url = "jdbc:mysql://localhost:3306/formulaire";
+		String url = "jdbc:mysql://localhost:3306/bibliotheque_db";
 		String user = "root";
 		String pwd= "Password29";
 		
