@@ -4,6 +4,7 @@
 <%@ page import="java.sql.SQLException"%>
 <%@ page import="java.sql.Statement"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="biblio.Book"%>
 
 <%@ page import="java.sql.Connection"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -32,16 +33,29 @@
 		ResultSet result = st.executeQuery("SELECT * FROM livre");
 		
 		//retrieve the results and add them in the ArrayList
+		ArrayList<Book> listBook = new ArrayList<Book>();
+
 		while (result.next()) {
-			%>
-			<p><%=result.getString("nom")%></p>
-			<p><%=result.getString("author")%></p>
-			<p><%=result.getString("ISBN")%></p>
-			<%
-		}
+			Book book = new Book();
+				
+				book.setNom(result.getString("nom"));
+				book.setAuthor(result.getString("author"));
+				book.setISBN(result.getString("ISBN"));
+				
+				listBook.add(book);
 		}
 		
 		
+		out.print("<ol>");
+		for(int i = 0; i <listBook.size(); i++) {
+			out.print("<li>"+listBook.get(i).getNom());
+			out.print(" " +listBook.get(i).getAuthor());
+			out.print(" " +listBook.get(i).getISBN());
+			out.print("</li>");
+		}
+		out.print("</ol>");
+		
+		}
 		catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
